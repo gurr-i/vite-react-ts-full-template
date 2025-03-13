@@ -31,6 +31,11 @@ A secure authentication template built with React, TypeScript, and SQLite, featu
 
 1. Clone the repository:
 
-```bash
-git clone https://github.com/gurr-i/vite-react-ts-full-template.git
-```
+   ```bash
+   git clone https://github.com/gurr-i/vite-react-ts-full-template.git
+   ```
+2. ```bash
+   npm install
+   npm run db:piush
+   npm run dev
+   ```
