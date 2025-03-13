@@ -1,6 +1,35 @@
+# Node.js dependencies
 node_modules
+
+# Build outputs
 dist
-.DS_Store
 server/public
-vite.config.ts.*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# Vite configuration
+# vite.config.ts.*
+
+# Archives
 *.tar.gz
+*.zip
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.swp
+
+database

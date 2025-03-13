@@ -37,20 +37,36 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen flex">
-      <div className="flex-1 flex items-center justify-center p-8">
-        <Card className="w-full max-w-md">
+    <div className="min-h-screen flex bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <div className="flex-1 flex items-center justify-center p-8 relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/[0.02] -z-10" />
+        <div className="absolute inset-0 flex items-center justify-center -z-10">
+          <div className="w-[800px] h-[800px] bg-primary/20 rounded-full blur-3xl" />
+        </div>
+        <Card className="w-full max-w-md border border-white/10 shadow-2xl bg-black/40 backdrop-blur-xl">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold text-center">Welcome</CardTitle>
-            <CardDescription className="text-center">
+            <CardTitle className="text-3xl font-bold text-center bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              Welcome
+            </CardTitle>
+            <CardDescription className="text-center text-gray-300">
               Sign in to your account or create a new one
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-8">
-                <TabsTrigger value="login">Login</TabsTrigger>
-                <TabsTrigger value="register">Register</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-2 mb-8 bg-white/10">
+                <TabsTrigger 
+                  value="login"
+                  className="data-[state=active]:bg-primary data-[state=active]:text-white"
+                >
+                  Login
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="register"
+                  className="data-[state=active]:bg-primary data-[state=active]:text-white"
+                >
+                  Register
+                </TabsTrigger>
               </TabsList>
 
               <AnimatePresence mode="wait">
@@ -59,7 +75,7 @@ export default function AuthPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
                 >
                   <TabsContent value="login">
                     <Form {...loginForm}>
@@ -70,11 +86,17 @@ export default function AuthPage() {
                             name="username"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel>Username</FormLabel>
+                                <FormLabel className="text-gray-200">Username</FormLabel>
                                 <FormControl>
-                                  <Input {...field} type="text" placeholder="Enter username" />
+                                  <Input 
+                                    {...field} 
+                                    type="text" 
+                                    placeholder="Enter username" 
+                                    className="bg-white/10 border-white/20 text-white placeholder:text-gray-400
+                                    focus:border-primary focus:ring-primary transition-colors"
+                                  />
                                 </FormControl>
-                                <FormMessage />
+                                <FormMessage className="text-red-400" />
                               </FormItem>
                             )}
                           />
@@ -83,17 +105,24 @@ export default function AuthPage() {
                             name="password"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel>Password</FormLabel>
+                                <FormLabel className="text-gray-200">Password</FormLabel>
                                 <FormControl>
-                                  <Input {...field} type="password" placeholder="Enter password" />
+                                  <Input 
+                                    {...field} 
+                                    type="password" 
+                                    placeholder="Enter password" 
+                                    className="bg-white/10 border-white/20 text-white placeholder:text-gray-400
+                                    focus:border-primary focus:ring-primary transition-colors"
+                                  />
                                 </FormControl>
-                                <FormMessage />
+                                <FormMessage className="text-red-400" />
                               </FormItem>
                             )}
                           />
                           <Button 
                             type="submit" 
-                            className="w-full"
+                            className="w-full bg-primary hover:bg-primary/90 text-white
+                            transition-colors duration-200"
                             disabled={loginMutation.isPending}
                           >
                             {loginMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -113,11 +142,17 @@ export default function AuthPage() {
                             name="username"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel>Username</FormLabel>
+                                <FormLabel className="text-gray-200">Username</FormLabel>
                                 <FormControl>
-                                  <Input {...field} type="text" placeholder="Choose username" />
+                                  <Input 
+                                    {...field} 
+                                    type="text" 
+                                    placeholder="Choose username" 
+                                    className="bg-white/10 border-white/20 text-white placeholder:text-gray-400
+                                    focus:border-primary focus:ring-primary transition-colors"
+                                  />
                                 </FormControl>
-                                <FormMessage />
+                                <FormMessage className="text-red-400" />
                               </FormItem>
                             )}
                           />
@@ -126,17 +161,24 @@ export default function AuthPage() {
                             name="password"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel>Password</FormLabel>
+                                <FormLabel className="text-gray-200">Password</FormLabel>
                                 <FormControl>
-                                  <Input {...field} type="password" placeholder="Choose password" />
+                                  <Input 
+                                    {...field} 
+                                    type="password" 
+                                    placeholder="Choose password" 
+                                    className="bg-white/10 border-white/20 text-white placeholder:text-gray-400
+                                    focus:border-primary focus:ring-primary transition-colors"
+                                  />
                                 </FormControl>
-                                <FormMessage />
+                                <FormMessage className="text-red-400" />
                               </FormItem>
                             )}
                           />
                           <Button 
                             type="submit" 
-                            className="w-full"
+                            className="w-full bg-primary hover:bg-primary/90 text-white
+                            transition-colors duration-200"
                             disabled={registerMutation.isPending}
                           >
                             {registerMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -153,15 +195,19 @@ export default function AuthPage() {
         </Card>
       </div>
 
-      <div className="hidden lg:flex flex-1 bg-primary items-center justify-center p-12">
-        <div className="max-w-lg text-white">
+      <div className="hidden lg:flex flex-1 bg-gradient-to-br from-primary via-primary/80 to-primary/60 items-center justify-center p-12 relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/[0.05]" />
+        <div className="max-w-lg text-white relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+            className="space-y-6"
           >
-            <h1 className="text-4xl font-bold mb-6">Welcome to our Platform</h1>
-            <p className="text-lg opacity-90">
+            <h1 className="text-5xl font-bold mb-6 leading-tight">
+              Welcome to our Platform
+            </h1>
+            <p className="text-xl opacity-90 leading-relaxed">
               Your secure gateway to a world of possibilities. Join us today and experience
               seamless authentication with cutting-edge security.
             </p>

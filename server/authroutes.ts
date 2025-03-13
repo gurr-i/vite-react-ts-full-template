@@ -64,6 +64,12 @@ export function setupAuth(app: Express) {
       return res.status(400).send("Username already exists");
     }
 
+    // Validate password using the validatePassword function
+    const passwordValidation = validatePassword(req.body.password);
+    if (!passwordValidation.valid) {
+      return res.status(400).send(passwordValidation.message);
+    }
+
     const user = await storage.createUser({
       ...req.body,
       password: await hashPassword(req.body.password),
@@ -91,3 +97,30 @@ export function setupAuth(app: Express) {
     res.json(req.user);
   });
 }
+
+
+export const validatePassword = (password: string): { valid: boolean; message?: string } => {
+  if (!password || password.length === 0) {
+    return { valid: false, message: "Password cannot be empty" };
+  }
+  
+  if (password.length < 8) {
+    return { valid: false, message: "Password must be at least 8 characters long" };
+  }
+  
+  // Add more validation rules as needed
+  // Example: require at least one uppercase letter, one lowercase letter, one number, and one special character
+  const hasUppercase = /[A-Z]/.test(password);
+  const hasLowercase = /[a-z]/.test(password);
+  const hasNumber = /[0-9]/.test(password);
+  const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+  
+  if (!hasUppercase || !hasLowercase || !hasNumber || !hasSpecial) {
+    return { 
+      valid: false, 
+      message: "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character" 
+    };
+  }
+  
+  return { valid: true };
+};
