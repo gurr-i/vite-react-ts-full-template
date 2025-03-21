@@ -1,8 +1,8 @@
-# React Secure Authentication Template
+# ⚡ React Secure Authentication Template
 
 A secure authentication template built with React, TypeScript, and SQLite, featuring password hashing and session management.
 
-## Features
+## 🫏 Features
 
 - User registration and login
 - Secure password hashing using scrypt
@@ -15,17 +15,17 @@ A secure authentication template built with React, TypeScript, and SQLite, featu
 - Tailwind CSS for styling
 - Vite for fast development and building
 
-## Quick Start
+## 🪼 Quick Start
 
 Create a new project using this template:
 
 ```bash
-npx create-secure-auth-app my-app
+npx vite-react-ts-full-template yourprojectname
 ```
 
 This will create a new directory `my-app` with all the template files and dependencies installed.
 
-## Manual Installation
+## 🪸 Manual Installation
 
 ### Prerequisites
 
@@ -35,17 +35,25 @@ This will create a new directory `my-app` with all the template files and depend
 ### Installation Steps
 
 1. Create a new project:
+
    ```bash
-   npm create secure-auth-app my-app
+   npm vite-react-ts-full-template my-app
    cd my-app
    ```
-
 2. Start the development server:
+
    ```bash
+   npm run db:push
    npm run dev
    ```
+3. if Port is already in use:
 
-## Project Structure
+   ```
+   netstat -ano | findstr :5000
+   taskkill /PID TASKID /F
+   ```
+
+## 🕵️ Project Structure
 
 ```
 ├── client/               # Frontend React application
@@ -61,7 +69,7 @@ This will create a new directory `my-app` with all the template files and depend
 └── shared/             # Shared types and utilities
 ```
 
-## Security Features
+## 🔐 Security Features
 
 - CORS protection
 - Rate limiting
@@ -72,7 +80,7 @@ This will create a new directory `my-app` with all the template files and depend
 - HTTP security headers
 - Input validation
 
-## Environment Variables
+## 🐳 Environment Variables
 
 Create a `.env` file in the root directory:
 

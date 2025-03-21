@@ -4,9 +4,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { queryClient } from "./lib/queryClient";
 import NotFound from "@/pages/not-found";
 import HomePage from "@/pages/home-page";
-import AuthPage from "@/pages/auth-page";
-import { AuthProvider } from "@/hooks/use-auth";
+import AuthPage from "@/features/auth/pages/auth-page";
+import { AuthProvider } from "@/features/auth/hooks/use-auth";
 import { ProtectedRoute } from "./lib/protected-route";
+import { ThemeProvider } from "@/hooks/use-theme";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 function Router() {
   return (
@@ -20,12 +22,17 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Router />
-        <Toaster />
-      </AuthProvider>
-    </QueryClientProvider>
+    <ThemeProvider defaultTheme="light" storageKey="app-theme">
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <div className="fixed top-4 right-4 z-50">
+            <ThemeToggle />
+          </div>
+          <Router />
+          <Toaster />
+        </AuthProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 

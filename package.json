@@ -1,10 +1,12 @@
 {
-  "name": "react-secure-auth-template",
-  "version": "1.0.0",
+  "name": "vite-react-ts-full-template",
+  "version": "1.0.1",
+  "description": "A secure authentication template for React+Vite+Typescript applications",
+  "author": "Gurveer",
   "type": "module",
   "license": "MIT",
   "bin": {
-    "create-secure-auth-app": "./bin/cli.js"
+    "create-vite-react-app": "bin/cli.js"
   },
   "scripts": {
     "dev": "nodemon --exec tsx server/index.ts",
@@ -118,5 +120,15 @@
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"
-  }
+  },
+  "main": "postcss.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gurr-i/vite-react-ts-full-template.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/gurr-i/vite-react-ts-full-template/issues"
+  },
+  "homepage": "https://github.com/gurr-i/vite-react-ts-full-template#readme"
 }

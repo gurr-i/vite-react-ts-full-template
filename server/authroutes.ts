@@ -34,6 +34,10 @@ export function setupAuth(app: Express) {
     resave: false,
     saveUninitialized: false,
     store: storage.sessionStore,
+    cookie: {
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      secure: process.env.NODE_ENV === "production",
+    },
   };
 
   app.set("trust proxy", 1);
@@ -81,8 +85,51 @@ export function setupAuth(app: Express) {
     });
   });
 
-  app.post("/api/login", passport.authenticate("local"), (req, res) => {
+  app.post("/api/login", passport.authenticate("local"), async (req, res) => {
+    const { rememberMe } = req.body;
+    if (rememberMe) {
+      const rememberMeToken = randomBytes(32).toString("hex");
+      await storage.updateUser(req.user!.id, { rememberMeToken });
+      req.user!.rememberMeToken = rememberMeToken;
+    }
     res.status(200).json(req.user);
+  });
+
+  app.post("/api/forgot-password", async (req, res) => {
+    const { username } = req.body;
+    const user = await storage.getUserByUsername(username);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    const resetToken = randomBytes(32).toString("hex");
+    const resetTokenExpiry = Date.now() + 3600000; // 1 hour
+
+    await storage.updateUser(user.id, {
+      resetToken,
+      resetTokenExpiry,
+    });
+
+    // In a real application, send an email with the reset link
+    // For demo purposes, we'll just return the token
+    res.json({ message: "Password reset token generated", resetToken });
+  });
+
+  app.post("/api/reset-password", async (req, res) => {
+    const { token, password } = req.body;
+    const user = await storage.getUserByResetToken(token);
+
+    if (!user || !user.resetTokenExpiry || user.resetTokenExpiry < Date.now()) {
+      return res.status(400).send("Invalid or expired reset token");
+    }
+
+    await storage.updateUser(user.id, {
+      password: await hashPassword(password),
+      resetToken: null,
+      resetTokenExpiry: null,
+    });
+
+    res.json({ message: "Password reset successful" });
   });
 
   app.post("/api/logout", (req, res, next) => {
