@@ -6,36 +6,95 @@ A secure authentication template built with React, TypeScript, and SQLite, featu
 
 - User registration and login
 - Secure password hashing using scrypt
-- Session-based authentication
-- TypeScript support
-- SQLite database
-- Express.js backend
-- Passport.js authentication middleware
+- Session-based authentication with SQLite store
+- TypeScript support with full type safety
+- Express.js backend with secure middleware configuration
+- Rate limiting and security headers
+- Comprehensive error handling and logging
+- Modern UI components with Radix UI
+- Tailwind CSS for styling
+- Vite for fast development and building
 
-## Technologies
+## Quick Start
 
-- Frontend: React, TypeScript
-- Backend: Express.js, TypeScript
-- Database: SQLite
-- Authentication: Passport.js
-- Password Hashing: Node.js crypto module
+Create a new project using this template:
 
-## Getting Started
+```bash
+npx create-secure-auth-app my-app
+```
+
+This will create a new directory `my-app` with all the template files and dependencies installed.
+
+## Manual Installation
 
 ### Prerequisites
 
 - Node.js (v16 or higher)
 - npm (v8 or higher)
 
-### Installation
+### Installation Steps
 
-1. Clone the repository:
-
+1. Create a new project:
    ```bash
-   git clone https://github.com/gurr-i/vite-react-ts-full-template.git
+   npm create secure-auth-app my-app
+   cd my-app
    ```
-2. ```bash
-   npm install
-   npm run db:piush
+
+2. Start the development server:
+   ```bash
    npm run dev
    ```
+
+## Project Structure
+
+```
+├── client/               # Frontend React application
+│   ├── src/
+│   │   ├── components/   # Reusable UI components
+│   │   ├── pages/       # Page components
+│   │   ├── hooks/       # Custom React hooks
+│   │   └── lib/         # Utility functions
+├── server/              # Backend Express application
+│   ├── middleware/      # Express middleware
+│   ├── routes/         # API routes
+│   └── utils/          # Server utilities
+└── shared/             # Shared types and utilities
+```
+
+## Security Features
+
+- CORS protection
+- Rate limiting
+- Session management
+- XSS protection
+- CSRF protection
+- Secure password hashing
+- HTTP security headers
+- Input validation
+
+## Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+PORT=5000
+NODE_ENV=development
+SESSION_SECRET=your-secret-key
+DOMAIN=localhost
+```
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm run check` - Type check
+- `npm run db:push` - Update database schema
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+MIT

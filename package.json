@@ -1,8 +1,11 @@
 {
-  "name": "react-vite-express-template",
+  "name": "react-secure-auth-template",
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
+  "bin": {
+    "create-secure-auth-app": "./bin/cli.js"
+  },
   "scripts": {
     "dev": "nodemon --exec tsx server/index.ts",
     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
