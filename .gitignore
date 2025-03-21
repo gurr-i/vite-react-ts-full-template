@@ -33,3 +33,5 @@ logs
 *.swp
 
 database
+
+sessions
